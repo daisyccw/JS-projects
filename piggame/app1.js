@@ -7,8 +7,10 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 NEW1 - player throws a six two times in a row, player loses entire score and it's the next players turn
-NEW2 - Add an inputfield for the players to change the winning score
 
+NEW2 - Added an inputfield for the players to change the winning score
+NEW3 - 
+NEW4 - give the players the option to play with the new rule if they want(throwing 2x 6 = 0 points)
 */
 
 var scores, roundScore, activePlayer, gamePlaying;
@@ -28,11 +30,24 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDom.src = 'dice-' + dice + '.png';
 
         // 3. Update the round score IF the rolled number was NOT 1
-        if (prevDice === 6 && dice === 6) {
-            //player throws a six two times in a row, player loses entire score and it's the next players turn
-            scores[activePlayer] = 0;
-            document.querySelector('#score-' + activePlayer).textContent = '0';
+        var checkbox = document.getElementById('option').value;
+//new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
+        if (checkbox) {
+            if (prevDice === 6 && dice === 6) {
+                //player throws a six two times in a row, player loses entire score and it's the next players turn
+                scores[activePlayer] = 0;
+                document.querySelector('#score-' + activePlayer).textContent = '0';
+                nextPlayer();
+            }
+            else if (dice !== 1) {
+                //Add score
+                roundScore += dice; //roundscore = roundscore + dice
+                document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            }
+            else { // === 1
+                // next player
             nextPlayer();
+            }
         }
         else if (dice !== 1) {
             //Add score
@@ -42,8 +57,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         else { // === 1
             // next player
         nextPlayer();
-        }
-
+        } 
         prevDice = dice;
     }
 });
