@@ -30,7 +30,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDom.src = 'dice-' + dice + '.png';
 
         // 3. Update the round score IF the rolled number was NOT 1
-        var checkbox = document.getElementById('option').value;
+        checkbox = document.getElementById('option').value;
 //new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
         if (checkbox) {
             if (prevDice === 6 && dice === 6) {
