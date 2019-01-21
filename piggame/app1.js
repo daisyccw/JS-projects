@@ -30,34 +30,40 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDom.src = 'dice-' + dice + '.png';
 
         // 3. Update the round score IF the rolled number was NOT 1
+<<<<<<< HEAD
         checkbox = document.getElementById('option').value;
 //new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
+=======
+        // https://www.w3schools.com/jsref/dom_obj_checkbox.asp
+        // checked property returns true/false if its enabled
+        var checkbox = document.getElementById('option').checked;
+
+        // debugging information, opening the console on the browser should display the current value
+        console.info("checkbox: " + checkbox);
+
+        //new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
+        // if new rule enabled, do extra test
+>>>>>>> c0df92d5ac7989959eb585f66896bce6b90790d1
         if (checkbox) {
-            if (prevDice === 6 && dice === 6) {
-                //player throws a six two times in a row, player loses entire score and it's the next players turn
-                scores[activePlayer] = 0;
-                document.querySelector('#score-' + activePlayer).textContent = '0';
-                nextPlayer();
-            }
-            else if (dice !== 1) {
-                //Add score
-                roundScore += dice; //roundscore = roundscore + dice
-                document.querySelector('#current-' + activePlayer).textContent = roundScore;
-            }
-            else { // === 1
-                // next player
+          if (prevDice === 6 && dice === 6) {
+            //player throws a six two times in a row, player loses entire score and it's the next players turn
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = '0';
             nextPlayer();
-            }
+          }
         }
-        else if (dice !== 1) {
-            //Add score
-            roundScore += dice; //roundscore = roundscore + dice
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+
+        // doesnt matter if new rule is enabled, always do the "normal" tests
+        if (dice !== 1) {
+          //Add score
+          roundScore += dice; //roundscore = roundscore + dice
+          document.querySelector('#current-' + activePlayer).textContent = roundScore;
         }
         else { // === 1
-            // next player
-        nextPlayer();
-        } 
+          // next player
+          nextPlayer();
+        }
+
         prevDice = dice;
     }
 });
