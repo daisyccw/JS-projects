@@ -9,8 +9,8 @@ GAME RULES:
 NEW1 - player throws a six two times in a row, player loses entire score and it's the next players turn
 
 NEW2 - Added an inputfield for the players to change the winning score
-NEW3 - 
-NEW4 - give the players the option to play with the new rule if they want(throwing 2x 6 = 0 points)
+NEW3 - give the players the option to play with the new rule if they want(throwing 2x 6 = 0 points)
+TO DO - Add a second dice
 */
 
 var scores, roundScore, activePlayer, gamePlaying;
@@ -29,21 +29,14 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDom.style.display = 'block';
         diceDom.src = 'dice-' + dice + '.png';
 
-        // 3. Update the round score IF the rolled number was NOT 1
-<<<<<<< HEAD
-        checkbox = document.getElementById('option').value;
-//new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
-=======
-        // https://www.w3schools.com/jsref/dom_obj_checkbox.asp
+        // 3. Update the round score, IF the rolled number was NOT 1
         // checked property returns true/false if its enabled
         var checkbox = document.getElementById('option').checked;
 
         // debugging information, opening the console on the browser should display the current value
         console.info("checkbox: " + checkbox);
-
-        //new piece of code that is not yet working correctly... the value of the checkbox is not read, but why?        
+       
         // if new rule enabled, do extra test
->>>>>>> c0df92d5ac7989959eb585f66896bce6b90790d1
         if (checkbox) {
           if (prevDice === 6 && dice === 6) {
             //player throws a six two times in a row, player loses entire score and it's the next players turn
