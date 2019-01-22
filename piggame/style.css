@@ -176,7 +176,7 @@ i {
     flex-direction: column;
     align-items: flex-end;
     background-color: rgba(238, 187, 68, 0.867);
-    height: 100px;
+    height: 110px;
     width: 200px;
 }
 
@@ -214,7 +214,16 @@ i {
 
 .dice {
     position: absolute;
-    left: 50%;
+    left: 55%;
+    top: 178px;
+    transform: translateX(-50%);
+    height: 100px;
+    box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+
+.dice1 {
+    position: absolute;
+    left: 45%;
     top: 178px;
     transform: translateX(-50%);
     height: 100px;

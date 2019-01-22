@@ -18,16 +18,22 @@ var scores, roundScore, activePlayer, gamePlaying;
 init();
 
 var prevDice;
+var prevDice1;
 
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (gamePlaying) { 
         // 1. Random number
         var dice = Math.floor(Math.random() * 6) + 1;
+        var dice1 = Math.floor(Math.random() * 6) + 1;
 
         // 2. Display the result
         var diceDom = document.querySelector('.dice');
         diceDom.style.display = 'block';
         diceDom.src = 'dice-' + dice + '.png';
+
+        var diceDom1 = document.querySelector('.dice1');
+        diceDom1.style.display = 'block';
+        diceDom1.src = 'dice-' + dice1 + '.png';
 
         // 3. Update the round score, IF the rolled number was NOT 1
         // checked property returns true/false if its enabled
@@ -38,7 +44,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
        
         // if new rule enabled, do extra test
         if (checkbox) {
-          if (prevDice === 6 && dice === 6) {
+          if (prevDice === 6 && dice === 6 || prevDice1 === 6 && dice1 === 6) {
             //player throws a six two times in a row, player loses entire score and it's the next players turn
             scores[activePlayer] = 0;
             document.querySelector('#score-' + activePlayer).textContent = '0';
@@ -47,17 +53,19 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         }
 
         // doesnt matter if new rule is enabled, always do the "normal" tests
-        if (dice !== 1) {
-          //Add score
-          roundScore += dice; //roundscore = roundscore + dice
-          document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        }
-        else { // === 1
+        if (dice === 1 || dice1 === 1) {
           // next player
           nextPlayer();
         }
+        else { // !== 1
+            //Add score
+            roundScore += dice; //roundscore = roundscore + dice
+            roundScore += dice1;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }
 
         prevDice = dice;
+        prevDice1 = dice1;
     }
 });
 
@@ -85,6 +93,8 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         if (scores[activePlayer] >= newWScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.dice1').style.display = 'none';
+
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
             gamePlaying = false;
@@ -107,6 +117,7 @@ function nextPlayer() {
     document.querySelector('.player-1-panel').classList.toggle('active');
 
     document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice1').style.display = 'none';
 }
 
 document.querySelector('.btn-new').addEventListener('click', init);
@@ -119,6 +130,7 @@ function init() {
     winningScore = 100;
 
     document.querySelector('.dice').style.display = 'none';
+    document.querySelector('.dice1').style.display = 'none';
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
