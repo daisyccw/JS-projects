@@ -7,10 +7,10 @@ GAME RULES:
 - The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn
 - The first player to reach 100 points on GLOBAL score wins the game
 NEW1 - player throws a six two times in a row, player loses entire score and it's the next players turn
-
 NEW2 - Added an inputfield for the players to change the winning score
 NEW3 - give the players the option to play with the new rule if they want(throwing 2x 6 = 0 points)
-TO DO - Add a second dice
+BUGS to fix: show message if a 6 is thrown & prevent dicecheck for a one if 2x a 6 is thrown, to prevent mixed messages.
+
 */
 
 var scores, roundScore, activePlayer, gamePlaying;
@@ -45,7 +45,10 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         // if new rule enabled, do extra test
         if (checkbox) {
           if (prevDice === 6 && dice === 6 || prevDice1 === 6 && dice1 === 6) {
-            //player throws a six two times in a row, player loses entire score and it's the next players turn
+            //player throws a six two times in a row, player loses entire score, show message and it's the next players turn
+            document.getElementById('m6').style.display = 'block';
+            document.getElementById('m1').style.display = 'none'; 
+            console.info("6");
             scores[activePlayer] = 0;
             document.querySelector('#score-' + activePlayer).textContent = '0';
             nextPlayer();
@@ -54,11 +57,16 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
 
         // doesnt matter if new rule is enabled, always do the "normal" tests
         if (dice === 1 || dice1 === 1) {
-          // next player
+          // show message and next player
+          document.getElementById('m1').style.display = 'block';
+          document.getElementById('m6').style.display = 'none';
+          console.info("1");  
           nextPlayer();
         }
         else { // !== 1
-            //Add score
+            //hide messages and Add score
+            document.getElementById('m1').style.display = 'none';
+            document.getElementById('m6').style.display = 'none';
             roundScore += dice; //roundscore = roundscore + dice
             roundScore += dice1;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
@@ -118,6 +126,7 @@ function nextPlayer() {
 
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.dice1').style.display = 'none';
+
 }
 
 document.querySelector('.btn-new').addEventListener('click', init);
@@ -131,6 +140,8 @@ function init() {
 
     document.querySelector('.dice').style.display = 'none';
     document.querySelector('.dice1').style.display = 'none';
+    document.getElementById('m1').style.display = 'none';
+    document.getElementById('m6').style.display = 'none';
 
     document.getElementById('score-0').textContent = '0';
     document.getElementById('score-1').textContent = '0';
@@ -144,12 +155,3 @@ function init() {
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
 }
-
-//document.querySelector('#current-' + activePlayer).textContent = dice;
-//document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
-
-// var x = document.querySelector('#score-0').textContent;
-// console.log(x);
-
-//document.querySelector('.player-0-panel').classList.remove('active');
-//document.querySelector('.player-1-panel').classList.add('active');
