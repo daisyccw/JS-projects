@@ -9,7 +9,7 @@ GAME RULES:
 NEW1 - player throws a six two times in a row, player loses entire score and it's the next players turn
 NEW2 - Added an inputfield for the players to change the winning score
 NEW3 - give the players the option to play with the new rule if they want(throwing 2x 6 = 0 points)
-BUGS to fix: show message if a 6 is thrown & prevent dicecheck for a one if 2x a 6 is thrown, to prevent mixed messages.
+BUGS to fix: show message if a 6 is thrown & prevent dicecheck for a one, if 2x a 6 is thrown, to prevent mixed messages.
 
 */
 
@@ -35,7 +35,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDom1.style.display = 'block';
         diceDom1.src = 'dice-' + dice1 + '.png';
 
-        // 3. Update the round score, IF the rolled number was NOT 1
+        // 3. Update the round score, IF the rolled number was NOT 1 or 6
         // checked property returns true/false if its enabled
         var checkbox = document.getElementById('option').checked;
 
@@ -43,6 +43,24 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         console.info("checkbox: " + checkbox);
        
         // if new rule enabled, do extra test
+
+        // doesnt matter if new rule is enabled, always do the "normal" tests
+        if (dice === 1 || dice1 === 1) {
+            // show message and next player
+            document.getElementById('m1').style.display = 'block';
+            document.getElementById('m6').style.display = 'none';
+            console.info("1");  
+            nextPlayer();
+        }
+        else { // !== 1
+            //hide messages and Add score
+            document.getElementById('m1').style.display = 'none';
+            document.getElementById('m6').style.display = 'none';
+            roundScore += dice; //roundscore = roundscore + dice
+            roundScore += dice1;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        }
+
         if (checkbox) {
           if (prevDice === 6 && dice === 6 || prevDice1 === 6 && dice1 === 6) {
             //player throws a six two times in a row, player loses entire score, show message and it's the next players turn
@@ -54,24 +72,7 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             nextPlayer();
           }
         }
-
-        // doesnt matter if new rule is enabled, always do the "normal" tests
-        if (dice === 1 || dice1 === 1) {
-          // show message and next player
-          document.getElementById('m1').style.display = 'block';
-          document.getElementById('m6').style.display = 'none';
-          console.info("1");  
-          nextPlayer();
-        }
-        else { // !== 1
-            //hide messages and Add score
-            document.getElementById('m1').style.display = 'none';
-            document.getElementById('m6').style.display = 'none';
-            roundScore += dice; //roundscore = roundscore + dice
-            roundScore += dice1;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        }
-
+        
         prevDice = dice;
         prevDice1 = dice1;
     }
