@@ -1,0 +1,20 @@
+
+
+
+body, h1 {font-family: sans-serif, 'Courier New', Courier, monospace}
+
+body, html {height: 100%}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.bgimg {
+  background-image: url('https://picalls.com/wp-content/uploads/2015/03/Magic-forest.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+
