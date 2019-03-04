@@ -79,8 +79,7 @@
             start();
         }
     }
-
-    start();
+    document.getElementById("start").addEventListener("click", start);
 
 })();
 
