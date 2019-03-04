@@ -14,6 +14,8 @@
 //9. be careful: after task 8, the game literally never ends, so include the option to quit the game if the user writes 'exit' instead of the answer. in this case, DONT call the function from task 8
 //10. track the users score to make the game more fun! So each time an answer is correct, add 1 point to the score (hint: im going to use the power of closures for this, but you dont have to, just do this with the tools you feel more comfortable at this point)
 //11. display the score in the console. use yet another method for this.
+//MY OWN CREATIONS//
+//12. create a button to start the game, only when clicked on that button.
 
 (function() {
     function Question(question, answers, correct) {
