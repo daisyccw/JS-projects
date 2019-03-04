@@ -16,7 +16,8 @@
 //11. display the score in the console. use yet another method for this.
 
 
-//function question() { //why?
+//function question() {
+//}
 
     // the array of questions
     var questarr = ["What language is used to code this prompt window?", "How many words fit in this sentence?", "How many keys with numbers, do you have on your keyboard without the numpad?"];
@@ -70,5 +71,6 @@
         //next question
     }
     }
-    
-//}
+
+
+//question();
