@@ -1,6 +1,5 @@
 /*
 This is the result of following the lectures of The Complete Javascript Course by Jonas Schmedtman on Udemy.
-p.s. Still working on it.
 */
 
 // BUDGET CONTROLLER
